@@ -1,0 +1,6 @@
+static/
+__pycache__/
+venv/
+output/
+test.json
+test.py
