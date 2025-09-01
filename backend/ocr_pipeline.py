@@ -2,26 +2,26 @@
 import requests
 import json
 import os
+from io import BytesIO
 from PIL import Image
 import cv2
 import numpy as np
 
 
 class OCRPipeline:
-    def __init__(self, image):
-        self.path = "/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardPriceReader/output/temp/output.png"
-
-        self.api_key = "K85739286388957"
-
+    def __init__(self, image, api_key):
+        self.api_key = api_key
         self.image = Image.fromarray(image)
 
-    def check_size(self):
-        size = os.stat(self.path).st_size
+    def __check_size(self):
+        img_byte_arr = BytesIO()
+        self.image.save(img_byte_arr, format=self.image.format if self.image.format else 'png')
+        size = img_byte_arr.tell()
         if size > 1024*1000:
             return False
         return True
 
-    def crop(self,im):
+    def __crop(self,im):
         width, height = im.size
 
         left, top, right, bottom = 0, 0, width, height/3
@@ -33,25 +33,28 @@ class OCRPipeline:
         self.image = cv2.cvtColor(np.array(self.image), cv2.COLOR_BGR2GRAY)
         self.image = cv2.GaussianBlur(self.image, (5,5), 0)
         self.image = Image.fromarray(self.image)
-        self.image.save(self.path, optimize=True)
 
         #reduce image
-        while not self.check_size():
-            self.image = self.crop(self.image)
-            self.image.save(self.path, optimize=True)
+        while not self.__check_size():
+            self.image = self.__crop(self.image)
 
-        self.image = Image.open(self.path)
-        
+        buffer = BytesIO()
+        self.image.save(buffer, format="PNG", optimize=True)
+        buffer.seek(0)
+
         #fetch ocr from api
-        with open(self.path, 'rb') as image_file:
-            response = requests.post(
-                source,
-                files={'filename': image_file},
-                data={
-                    'apikey': self.api_key,
-                    'language': 'eng'
-                }
-            )
+        files = {
+        'filename': ('image.png', buffer, 'image/png')
+        }
+
+        response = requests.post(
+            source,
+            files=files,
+            data={
+                'apikey': self.api_key,
+                'language': 'eng'
+            }
+        )
 
         result = response.json()
         self.data = result

@@ -1,5 +1,6 @@
 import time
 import json
+from PIL import Image
 
 from backend.background_remover import BackgroundRemover
 from backend.ocr_pipeline import OCRPipeline
@@ -10,13 +11,17 @@ def main_process():
     path = '/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardPriceReader/static/assets/test.png'
     start_time = time.perf_counter()
 
-    segmenter = BackgroundRemover()
+    image = Image.open(path)
+    segmenter = BackgroundRemover(image=image)
     segmenter.remove_bg_main()
     segmented = segmenter.return_result()
 
     print(time.perf_counter() - start_time)
 
-    ocr_pipeline = OCRPipeline(segmented)
+    with open("ocr_api_key.json", "r") as file:
+        key = json.loads(file.read())["key"]
+
+    ocr_pipeline = OCRPipeline(segmented,key)
     ocr_pipeline.ocr_main()
     card_name = ocr_pipeline.extract_card_name()
 

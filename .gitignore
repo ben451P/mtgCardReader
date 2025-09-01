@@ -4,3 +4,4 @@ venv/
 output/
 test.json
 test.py
+ocr_api_key.json
