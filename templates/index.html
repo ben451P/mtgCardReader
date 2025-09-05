@@ -38,6 +38,10 @@
     <input type="file" id="fileInput" name="file" accept="image/*">
   </form>
 
+  <h1>Live MTG Card Detector</h1>
+    <img src="{{ url_for('video_feed') }}" style="width: 80%; display: block; margin: auto;" />
+  </body>
+
   <script>
     const uploadArea = document.getElementById("uploadArea");
     const fileInput = document.getElementById("fileInput");
