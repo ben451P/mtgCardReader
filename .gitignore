@@ -6,3 +6,7 @@ test.json
 ocr_api_key.json
 test.py
 ideas.txt
+classified/
+dataset/
+misclassified/
+dataset1.pt

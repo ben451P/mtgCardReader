@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 import os, random
 import cv2
-from .model import ScryfallAPI
 
-base = "/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardReaderA2/right_side_up_workspace/dataset"
+base = "/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardReaderA2/right_side_up_workspace/classified"
 dataset = []
 for path in os.listdir(base):
     for _ in range(10):
@@ -24,6 +23,8 @@ ax = ax.flatten()
 
 for i,img in enumerate(random.sample(dataset,9)):
     ax[i].imshow(img)
+print(labels)
 
 plt.show()
+
 

@@ -35,6 +35,7 @@ class OCRPipeline:
         self.image = Image.fromarray(self.image)
 
         #reduce image
+        self.image = self.__crop(self.image)
         while not self.__check_size():
             self.image = self.__crop(self.image)
 
