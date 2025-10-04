@@ -1,8 +1,9 @@
 import torch
 from torchvision import transforms
+from PIL import Image
 import numpy as np
 import cv2
-from background_remover_model import U2NET
+from background_remover_model import U2NET  # Ensure this import matches the U2NET model definition
 
 class BackgroundRemover:
     def __init__(self, image, model_path='/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardPriceReader/static/assets/saved_models/face_detection_cv2/u2net.pth'):

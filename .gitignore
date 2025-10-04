@@ -10,4 +10,4 @@ classified/
 dataset/
 misclassified/
 dataset1.pt
-finetuned/
+test.png
