@@ -3,7 +3,7 @@ from torchvision import transforms
 from PIL import Image
 import numpy as np
 import cv2
-from background_remover_model import U2NET  # Ensure this import matches the U2NET model definition
+from background_remove import U2NET  # Ensure this import matches the U2NET model definition
 
 class BackgroundRemover:
     def __init__(self, image, model_path='/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardPriceReader/static/assets/saved_models/face_detection_cv2/u2net.pth'):
@@ -22,7 +22,6 @@ class BackgroundRemover:
                                 [0.229, 0.224, 0.225])
         ])
         return transform(self.image).unsqueeze(0)
-    
 
     def __load_model(self):
         net = U2NET(3, 1)
