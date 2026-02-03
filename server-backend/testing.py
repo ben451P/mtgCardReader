@@ -16,6 +16,7 @@ path = "/Users/benlozzano/VS-Code-Coding/Ongoing/MTGCardReaderA2/server-backend/
 image = cv2.imread(path)
 image = np.array(Image.open(path))
 got_image = get_card_data_from_image(image)
+print(got_image)
 
 def test_system():
     BASE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -28,7 +29,7 @@ def test_system():
         image = np.array(Image.open(image_dir))
         got_image = get_card_data_from_image(image)
 
-        if got_image["obkect"] == "card": acc += 1
+        if got_image["object"] == "card": acc += 1
     
     acc = round(acc / len(image_names), 5)
     return acc

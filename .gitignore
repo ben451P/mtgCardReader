@@ -3,7 +3,14 @@ __pycache__/
 test.py
 models/
 tests/
-model_weights/
+
+server-backend/backend/modules/background_remove/model_weights/*
+server-backend/backend/modules/image_preprocess/model_weights/*
+server-backend/backend/modules/title_extract/model_weights/*
+!server-backend/backend/modules/background_remove/model_weights/.gitkeep
+!server-backend/backend/modules/image_preprocess/model_weights/.gitkeep
+!server-backend/backend/modules/title_extract/model_weights/.gitkeep
+
 model_setups/
 
 
