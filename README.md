@@ -199,19 +199,4 @@ npm run lint
 
 ## License
 
-This project is provided as-is for personal and educational use.
-
-## Troubleshooting
-
-- **Model files not found**: Ensure you've downloaded the model weights from the provided links and extracted them to the correct directories
-- **CORS errors**: Ensure Flask backend is running with CORS enabled
-- **Card not recognized**: Try uploading a clearer, well-lit image of the card
-- **Port conflicts**: If ports 3000 or 5000 are in use, update the configuration accordingly
-
-## Future Enhancements
-
-- Support for multiple card variants
-- Bulk card analysis
-- Price history tracking
-- Mobile app version
-- Card collection management
+This project is provided as-is for personal and educational use. Have fun with it!
